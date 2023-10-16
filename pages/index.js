@@ -22,14 +22,13 @@ export default function Home() {
             src="/space3.gif"
             alt="space image"
             layout="fill"
-            objectFit="cover"
             />
             
         </div>
 
       <main>
         <h1 className={styles.title}>
-          <u>Space data analysis</u>
+          <u>Mittelman Observatory Image Calibration</u>
         </h1>
 
         <p className={styles.description}>
@@ -38,13 +37,13 @@ export default function Home() {
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <h3>Get Started &rarr;</h3>
+            <p>Take the necessary steps to calibrate your image.</p>
           </a>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <h3>Tutorial &rarr;</h3>
+            <p>Learn how to calibrate your telescope image!</p>
           </a>
 
           <a
