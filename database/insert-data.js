@@ -4,8 +4,8 @@ const { MongoClient } = require("mongodb");
 const url = "mongodb+srv://jkantaros:rushsand34@gallery.jlbrqhi.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(url);
  
- // Reference the database to use
- const dbName = "gettingStarted";
+ // Reference the database to use, can be new
+ const dbName = "database";
                       
  async function run() {
     try {
@@ -13,7 +13,7 @@ const client = new MongoClient(url);
          await client.connect();
          const db = client.db(dbName);
 
-         // Reference the "people" collection in the specified database
+         // Reference the "people" collection in the specified database, can also be a new column
          const col = db.collection("people");
 
          // Create a new document                                                                                                                                           
