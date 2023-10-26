@@ -1,20 +1,21 @@
 import { NextResponse } from 'next/server'
 
 type Upload = {
-  formData: FormData
+  file: File 
 }
+
+
+const { MongoClient } = require("mongodb");
+  
+// Replace the following with your Atlas connection string                                                                                                                                        
+const url = "mongodb+srv://jkantaros:rushsand34@gallery.jlbrqhi.mongodb.net/?retryWrites=true&w=majority"
+const client = new MongoClient(url);
+
+//Looking for telescope images
+const dbName = "telescope-images";
 
 export async function POST(request: Request) {
   const data: Upload = await request.json()
-  const {formData} = data
-
-  // Mongo DB
-  const { MongoClient } = require("mongodb");
-  const url = "mongodb+srv://jkantaros:rushsand34@gallery.jlbrqhi.mongodb.net/?retryWrites=true&w=majority"
-  const client = new MongoClient(url);
-
-  // Reference the database to use, can be new
-  const dbName = "telescope-images";
 
   await client.connect();
   const db = client.db(dbName);
@@ -22,8 +23,25 @@ export async function POST(request: Request) {
   // Reference the "people" collection in the specified database, can also be a new column
   const col = db.collection("images");                                                                                                                                    
   
-
   // Insert the document into the specified collection        
-  const p = await col.insertOne(formData);
-  return NextResponse.json({formData})
+  const p = await col.insertOne(data);
+  return NextResponse.json({"message":"File Successfully Uploaded to Database"})
+}
+
+
+// GET REQUEST
+export async function GET(request: Request) {
+  
+  await client.connect();
+  const db = client.db(dbName);
+
+  const col = db.collection("images");
+  const findResult = await col.find().toArray()
+
+  console.log(findResult.map((image:any, index:any) => {
+    return image['file']
+  }))
+
+  return NextResponse.json({'Found documents =>': findResult})
+  
 }
