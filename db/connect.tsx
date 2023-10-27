@@ -8,8 +8,10 @@ async function run() {
     try {
         await client.connect();
         console.log("Successfully connected to Atlas");
-    } catch (err) {
-        console.log(err.stack);
+    } catch (error) {
+        if (error) {
+          console.log(`Error worth logging: ${error}`); // special case for some reason
+        }
     }
     finally {
         await client.close();
