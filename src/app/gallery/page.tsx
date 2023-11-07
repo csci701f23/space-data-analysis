@@ -1,82 +1,57 @@
 "use client"
-
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import Image from 'next/image';
-
+import {ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
+import {storage} from '../../../db/firebase'
 
 export default function Gallery() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [images, setImages] = useState<any[]>([]);
-
+  const [imageList, setImageList] = useState<Array<any>>([]);
+  
+  // Initialize Firebase
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0]; // Get the first selected file
     setSelectedFile(file || null);
   };
 
-  const handleUpload = async() => {
+  const handleUpload = () => {
 
     if (selectedFile) {
 
-      //const formData = new FormData();
-      //formData.append('file', selectedFile);
+      const imageRef = ref(storage, `images/${selectedFile.name + v4()}`)
 
-      const res = await fetch('http://localhost:3000/api/upload',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-          "file": selectedFile,
-        })
+      uploadBytes(imageRef, selectedFile).then(() => {
+        alert("Image Uploaded")
       })
-
-      const data = await res.json()
-      console.log(data)
-
     }
-    
   };
 
-
-  // GET REQUEST
-  const fetchImageList = async () => {
-    const res = await fetch('http://localhost:3000/api/upload',
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type':'application/json'
-      },
-    })
-
-    if (res.ok) {
-      const data = await res.json();
-      const documents = data['Found documents =>']
-      setImages(documents);
-    }
-
-  }
-
+const imageListRef = ref(storage, 'images/')
 //NEW
 useEffect(() => {
-    fetchImageList();
+  setImageList([]) // Make sure to zero it out
+  listAll(imageListRef).then((response) => {
+    response.items.forEach((item) => {
+      getDownloadURL(item).then((url) => {
+        setImageList((prev) => [...prev, url])
+      })
+    })
+  })
+    
   }, []);
 
+  // NEED TO STYLE THE GALLERY
   return (
     <div>
       <input type="file" accept="image/gif, image/jpeg, image/png" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
 
-      {images.map((image, index) => {
-        return <Image key={index} src={image} width={200} height={300} alt='image'/>
+      {imageList.map((url, index) => {
+        return <Image src={url} key={index} alt='Images' width={300} height={200}/>
       })}
-
     </div>
+
+
   );
 }
-
-
-
-
-
-

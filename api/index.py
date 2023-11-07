@@ -1,9 +1,11 @@
-from flask import Flask
+from flask import Flask, request
+
 app = Flask(__name__)
 
-@app.route('/api/hello', methods=['GET'])
+@app.route('/hello', methods=['GET'])
 def hello_world():
-    return "Hello, World!"
+    print("Received request at /api/hello")
+    return "HELLO"
 
 if __name__ == '__main__':
-    app.run(port=5328)
+    app.run(host='127.0.0.1', port=5328)
