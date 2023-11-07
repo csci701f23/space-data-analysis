@@ -33,3 +33,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# image files
+/calibration-data
+/raw-data
+**.fit
+*.jpeg
+*.pyc
