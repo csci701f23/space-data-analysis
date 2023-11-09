@@ -6,6 +6,7 @@ import {storage} from '../../../db/firebase'
 
 export default function Calibrate() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileInformation, setFileInfo] = useState<String>("")
   
   // Initialize Firebase
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,12 +17,19 @@ export default function Calibrate() {
   const handleUpload = () => {
 
     if (selectedFile) {
+      
+      const fileName = selectedFile.name + v4()
+      const imageRef = ref(storage, `fits/${fileName}`)
 
-      const imageRef = ref(storage, `fits/${selectedFile.name}`)
-
-      uploadBytes(imageRef, selectedFile).then(() => {
+      uploadBytes(imageRef, selectedFile)
+      .then(() => {
         alert("Image Uploaded")
+        return fetch(`api/firebase/${fileName}`)
       })
+      .then(response => response.json())
+      .then(data => setFileInfo(data))
+      .catch(err => console.error(err));
+
     }
   };
 
@@ -40,6 +48,10 @@ export default function Calibrate() {
       
       <div className='m-5'>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleUpload}>Upload</button>
+      </div>
+
+      <div className='m-5'>
+        <p>{fileInformation}</p>
       </div>
 
     </div>

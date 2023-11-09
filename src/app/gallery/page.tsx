@@ -19,17 +19,13 @@ export default function Gallery() {
 
     if (selectedFile) {
 
-      const imageRef = ref(storage, `images/${selectedFile.name + v4()}`)
+      const imageRef = ref(storage, `fits/${selectedFile.name + v4()}`)
 
       uploadBytes(imageRef, selectedFile).then(() => {
         alert("Image Uploaded")
       })
 
-      // CONTINUE WORKING HERE
-      fetch("api/hello/")
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(err => console.error(err));
+
     }
   };
 

@@ -1,14 +1,15 @@
-from flask import Flask
-import firebase_admin
-from firebase_admin import credentials, storage
+from flask import Flask, jsonify
+from utils.firebase_utils import Connector
 from calibration.imageinfo import read_image
 from utils.serialize import Serializer
+import os
 
 app = Flask(__name__)
 
-@app.route('/hello', methods=['GET'])
-def hello_world():
+@app.route('/ping', methods=['GET'])
+def ping():
     response_dict = {"Ping": "Pong"}
+    
     # Serializer Class
     serializer = Serializer()
     response = serializer.ping_output(response_dict)
@@ -18,21 +19,19 @@ def hello_world():
 @app.route('/firebase/<filename>', methods=['GET'])
 def FirebaseConnection(filename):
 
-    cred = credentials.Certificate("db/space-data-analysis-fd9d81db79de.json")
-    firebase_admin.initialize_app(cred,{'storageBucket': 'space-data-analysis.appspot.com'})
+    # Download file
+    connector = Connector()
+    connector.download(filename)
 
-    file_path = "images/" + filename
-    
-    
-    bucket = storage.bucket() 
-    blob = bucket.blob(file_path)
-    blob.download_to_filename("api/temp.fit")
+    # Perform necessary operations with data
+    #message = read_image(f"api/{filename}")
 
-    message = read_image("api/temp.fit")
-    if message=="Image read":
-        return "Success so far"
+    # SERIALIZE DATA
+    #if message=="Image read":
+    return jsonify("Working")
     
-    # NEED TO DELETE TEMP WHEN DONE WITH IT
+    # Delete temp file after done with it
+   # os.remove(f"api/{filename}")
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5328)
