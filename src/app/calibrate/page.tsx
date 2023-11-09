@@ -6,7 +6,7 @@ import {storage} from '../../../db/firebase'
 
 export default function Calibrate() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileInformation, setFileInfo] = useState<String>("")
+  const [fileInformation, setFileInfo] = useState<any | null>("")
   
   // Initialize Firebase
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +33,6 @@ export default function Calibrate() {
     }
   };
 
-
-  // NEED TO STYLE THE GALLERY
   return (
     <div className='m-5'>
       <h1 className='text-2xl'>Select a FITS file to begin calibration</h1>
@@ -51,7 +49,9 @@ export default function Calibrate() {
       </div>
 
       <div className='m-5'>
-        <p>{fileInformation}</p>
+        <p>Image Exposure: {fileInformation.exposure}</p>
+        <p>Image Type: {fileInformation.imageType}</p>
+        <p>Image Temp: {fileInformation.temp}</p>
       </div>
 
     </div>

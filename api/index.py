@@ -24,14 +24,9 @@ def FirebaseConnection(filename):
     connector.download(filename)
 
     # Perform necessary operations with data
-    #message = read_image(f"api/{filename}")
-
-    # SERIALIZE DATA
-    #if message=="Image read":
-    return jsonify("Working")
-    
-    # Delete temp file after done with it
-   # os.remove(f"api/{filename}")
+    imageInfo = read_image(f"api/{filename}")
+    os.remove(f"api/{filename}")
+    return jsonify(imageInfo)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5328)

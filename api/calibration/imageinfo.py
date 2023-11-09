@@ -23,8 +23,8 @@ from astropy.nddata import CCDData
 
 def read_image(image_path):
     ccd = CCDData.read(image_path, unit='adu')
-    print('Image Type:', ccd.meta['imagetyp'])
+    imageType = ccd.meta['imagetyp']
     #print('Filter:', ccd.meta['filter'])
-    print('CCD Temperature:', ccd.meta['ccd-temp'], 'degrees Celsius')
-    print('Exposure Time:', ccd.meta['exptime'], 's')
-    return "Image read"
+    temp = ccd.meta['ccd-temp'], 'degrees Celsius'
+    exposureTime = ccd.meta['exptime']
+    return {"imageType" : imageType, "temp": temp, "exposure": exposureTime}
