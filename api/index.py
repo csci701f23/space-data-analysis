@@ -1,15 +1,18 @@
 from flask import Flask
 import firebase_admin
 from firebase_admin import credentials, storage
-from google.oauth2 import service_account
 from calibration.imageinfo import read_image
+from utils.serialize import Serializer
 
 app = Flask(__name__)
 
 @app.route('/hello', methods=['GET'])
 def hello_world():
-    print("Received request at /api/hello")
-    return "HELLO"
+    response_dict = {"Ping": "Pong"}
+    # Serializer Class
+    serializer = Serializer()
+    response = serializer.ping_output(response_dict)
+    return response
 
 
 @app.route('/firebase/<filename>', methods=['GET'])

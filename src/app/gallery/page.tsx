@@ -24,6 +24,12 @@ export default function Gallery() {
       uploadBytes(imageRef, selectedFile).then(() => {
         alert("Image Uploaded")
       })
+
+      // CONTINUE WORKING HERE
+      fetch("api/hello/")
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
     }
   };
 
