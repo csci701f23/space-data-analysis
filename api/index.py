@@ -28,5 +28,9 @@ def FirebaseConnection(filename):
     os.remove(f"api/{filename}")
     return jsonify(imageInfo)
 
+@app.route('/combine', methods=['GET'])
+def CombineImages():
+    pass
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5328)

@@ -1,61 +1,49 @@
-"use client"
-import React, { useState, ChangeEvent, useEffect } from 'react';
-import {ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
-import { v4 } from 'uuid';
-import {storage} from '../../../db/firebase'
+"use client";
+import React, { useState, ChangeEvent, useEffect } from "react";
+import UploadRaw from "../components/uploadRaw";
 
 export default function Calibrate() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileInformation, setFileInfo] = useState<any | null>("")
-  
-  // Initialize Firebase
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0]; // Get the first selected file
-    setSelectedFile(file || null);
-  };
+  const [currentStep, setCurrentStep] = useState("red");
 
-  const handleUpload = () => {
-
-    if (selectedFile) {
-      
-      const fileName = selectedFile.name + v4()
-      const imageRef = ref(storage, `fits/${fileName}`)
-
-      uploadBytes(imageRef, selectedFile)
-      .then(() => {
-        alert("Image Uploaded")
-        return fetch(`api/firebase/${fileName}`)
-      })
-      .then(response => response.json())
-      .then(data => setFileInfo(data))
-      .catch(err => console.error(err));
-
+  const handleContinue = () => {
+    if (currentStep === "red") {
+      setCurrentStep("green");
+    } else if (currentStep === "green") {
+      setCurrentStep("blue");
+    } else if (currentStep === "blue") {
+      // Here is where we can perform next steps including
+      // more calibration uploads or calling python scripts to
+      // calibrate the images
+      // We will have to be very specific where we upload the images in
+      // terms of naming conventions so we can grab them + calibrate later
+      setCurrentStep("nextComponent");
     }
   };
 
   return (
-    <div className='m-5'>
-      <h1 className='text-2xl'>Select a FITS file to begin calibration</h1>
-      <div className="relative rounded-md shadow-sm m-5">
-        <input type="file" onChange={handleFileChange} className="sr-only" id="fileInput" />
-
-        <label htmlFor="fileInput" className="cursor-pointer bg-indigo-500 text-white px-4 py-2 rounded-md border border-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring focus:border-indigo-700 active:bg-indigo-700">
-          Choose a File
-        </label>
-      </div>
-      
-      <div className='m-5'>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleUpload}>Upload</button>
-      </div>
-
-      <div className='m-5'>
-        <p>Image Exposure: {fileInformation.exposure}</p>
-        <p>Image Type: {fileInformation.imageType}</p>
-        <p>Image Temp: {fileInformation.temp}</p>
-      </div>
-
+    <div>
+      {currentStep === "red" && (
+        <UploadRaw
+          color={"RED"}
+          tailwindColor={"text-red-500"}
+          onNext={handleContinue}
+        />
+      )}
+      {currentStep === "green" && (
+        <UploadRaw
+          color={"GREEN"}
+          tailwindColor={"text-green-500"}
+          onNext={handleContinue}
+        />
+      )}
+      {currentStep === "blue" && (
+        <UploadRaw
+          color={"BLUE"}
+          tailwindColor={"text-blue-500"}
+          onNext={handleContinue}
+        />
+      )}
+      {currentStep === "nextComponent" && <div>THANK YOU!</div>}
     </div>
-
-
   );
 }
