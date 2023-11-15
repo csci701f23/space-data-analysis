@@ -1,13 +1,12 @@
 "use client"
 import React, { useState, ChangeEvent, useEffect } from 'react';
-import Image from 'next/image';
 import {ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 import {storage} from '../../../db/firebase'
 
-export default function Gallery() {
+export default function Calibrate() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [imageList, setImageList] = useState<Array<any>>([]);
+  const [fileInformation, setFileInfo] = useState<any | null>("")
   
   // Initialize Firebase
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,35 +17,25 @@ export default function Gallery() {
   const handleUpload = () => {
 
     if (selectedFile) {
+      
+      const fileName = selectedFile.name + v4()
+      const imageRef = ref(storage, `fits/${fileName}`)
 
-      const imageRef = ref(storage, `fits/${selectedFile.name + v4()}`)
-
-      uploadBytes(imageRef, selectedFile).then(() => {
+      uploadBytes(imageRef, selectedFile)
+      .then(() => {
         alert("Image Uploaded")
+        return fetch(`api/firebase/${fileName}`)
       })
-
+      .then(response => response.json())
+      .then(data => setFileInfo(data))
+      .catch(err => console.error(err));
 
     }
   };
 
-const imageListRef = ref(storage, 'images/')
-//NEW
-useEffect(() => {
-  setImageList([]) // Make sure to zero it out
-  listAll(imageListRef).then((response) => {
-    response.items.forEach((item) => {
-      getDownloadURL(item).then((url) => {
-        setImageList((prev) => [...prev, url])
-      })
-    })
-  })
-    
-  }, []);
-
-  // NEED TO STYLE THE GALLERY
   return (
     <div className='m-5'>
-      <h1 className='text-2xl'>Welcome to the Gallery!</h1>
+      <h1 className='text-2xl'>Select a FITS file to begin calibration</h1>
       <div className="relative rounded-md shadow-sm m-5">
         <input type="file" onChange={handleFileChange} className="sr-only" id="fileInput" />
 
@@ -58,11 +47,11 @@ useEffect(() => {
       <div className='m-5'>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleUpload}>Upload</button>
       </div>
-      
-      <div className= "grid grid-cols-3 gap-4 items-center justify-center m-30">
-      {imageList.map((url, index) => {
-        return <Image src={url} key={index} alt='Images' width={300} height={200}/>
-      })}
+
+      <div className='m-5'>
+        <p>Image Exposure: {fileInformation.exposure}</p>
+        <p>Image Type: {fileInformation.imageType}</p>
+        <p>Image Temp: {fileInformation.temp}</p>
       </div>
 
     </div>

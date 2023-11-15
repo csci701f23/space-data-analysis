@@ -40,3 +40,7 @@ next-env.d.ts
 **.fit
 *.jpeg
 *.pyc
+
+cs701-files/
+
+**__pycache__**
