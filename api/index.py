@@ -28,8 +28,20 @@ def FirebaseConnection(filename):
     os.remove(f"api/{filename}")
     return jsonify(imageInfo)
 
-@app.route('/combine', methods=['GET'])
-def CombineImages():
+@app.route('/combine/<v4>', methods=['GET'])
+def CombineImages(v4):
+    """
+    Steps:
+
+    1. Get all images we need
+    2. Save to a directory
+    3. CreateRGB and pass in those routes
+    4. Upload to firebase
+    5. All set, 200 message
+    6. Front end displays
+    
+    """
+
     pass
 
 if __name__ == '__main__':

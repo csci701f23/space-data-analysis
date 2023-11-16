@@ -76,3 +76,4 @@ def create_rgb(raw_directory, calibration_directory, output_filepath):
         
     # call combineRGB function to combine calibrated science images into one full-color jpeg image
     combineRGB(calibrated_images, scaling_parameters, output_filepath)
+    return output_filepath
