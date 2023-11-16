@@ -28,6 +28,7 @@ def FirebaseConnection(filename):
     os.remove(f"api/{filename}")
     return jsonify(imageInfo)
 
+
 @app.route('/combine/<v4>', methods=['GET'])
 def CombineImages(v4):
     """
@@ -40,9 +41,6 @@ def CombineImages(v4):
     5. All set, 200 message
     6. Front end displays
     
-    """
-
-    pass
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5328)
