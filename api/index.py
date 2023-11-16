@@ -27,6 +27,7 @@ def FirebaseConnection(filename):
     # Perform necessary operations with data
     imageInfo = read_image(f"api/{filename}")
     os.remove(f"api/{filename}")
+    print(jsonify(imageInfo))
     return jsonify(imageInfo)
 
 
@@ -44,8 +45,8 @@ def CombineImages(uniqueID):
     """
 
     # Define where the firebase images will go
-    raw_path = f"api/temp/{uniqueID}raw/"
-    combined_path = f"api/temp/{uniqueID}combined/"
+    raw_path = f"api/temp/{uniqueID}/raw/"
+    combined_path = f"api/temp/{uniqueID}/combined/"
 
     # Make the directories
     os.makedirs(raw_path)
@@ -53,11 +54,12 @@ def CombineImages(uniqueID):
 
     # Download all files into correct directory
     connector = Connector()
-    connector.download_folder(f"calibrate/{uniqueID}raw_science", raw_path)
+    connector.download_folder(f"calibrate/{uniqueID}/raw_science", raw_path)
+    connector.download_folder(f"calibrate/{uniqueID}/combined", combined_path)
 
     # Remove when done
-    #shutil.rmtree(f"api/temp/{uniqueID}")
-    return
+    shutil.rmtree(f"api/temp/{uniqueID}")
+    return jsonify("WORKING!!")
     
 
 if __name__ == '__main__':
