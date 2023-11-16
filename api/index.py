@@ -4,6 +4,7 @@ from calibration.imageinfo import read_image
 from utils.serialize import Serializer
 import os
 import shutil
+from calibration.createRGB import create_rgb
 
 app = Flask(__name__)
 
@@ -56,6 +57,10 @@ def CombineImages(uniqueID):
     connector = Connector()
     connector.download_folder(f"calibrate/{uniqueID}/raw_science", raw_path)
     connector.download_folder(f"calibrate/{uniqueID}/combined", combined_path)
+
+    # Calibrate Image
+    output_path = create_rgb(raw_path, combined_path, "api/output.png")
+    print(output_path)
 
     # Remove when done
     shutil.rmtree(f"api/temp/{uniqueID}")
