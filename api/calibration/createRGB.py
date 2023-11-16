@@ -66,13 +66,15 @@ from astronomyRGB import combineRGB
 ############################ CALL astronomyRGB FUNCTIONS ################################
 
 # set inputs (see descriptions at top of script)
-raw_directory = './raw-data/M27'
-calibration_directory = './calibration-data'
-scaling_parameters = {'minimum':50, 'Q':1, 'stretch':25}
-output_filepath = './combinedRGBimage.jpeg'
 
-# call calibrate_images function to calibrate the raw science images
-calibrated_images = calibrate_images(raw_directory, calibration_directory)
-    
-# call combineRGB function to combine calibrated science images into one full-color jpeg image
-combineRGB(calibrated_images, scaling_parameters, output_filepath)
+def create_rgb(raw_directory, calibration_directory, output_filepath):
+
+    scaling_parameters = {'minimum':50, 'Q':1, 'stretch':25}
+
+    # call calibrate_images function to calibrate the raw science images
+    calibrated_images = calibrate_images(raw_directory, calibration_directory)
+        
+    # call combineRGB function to combine calibrated science images into one full-color jpeg image
+    combineRGB(calibrated_images, scaling_parameters, output_filepath)
+    return output_filepath
+
