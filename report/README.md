@@ -1,3 +1,5 @@
+### Mittleman Observatory Image Calibration (maybe update title)
+
 ### Introduction 
 
 Mittleman Observatory at Middlebury College is the “largest and best equipped”[^Middlebury] institution observatory in the state of Vermont. The aim of this project is to make the Middlebury telescope more accessible to Middlebury students. Many students do not know how to utilize the resources that the telescope provides, and there is currently no streamlined way to process telescope images. 
@@ -8,6 +10,13 @@ AstroPy is an open-sourced python package for astronomers that was developed sta
 
 By leveraging AstroPy packages, we can simplify the image calibration process for the Mittleman Observatory. 
 
+### Methodology 
+*How to use*
+
+- Node, Flask, Firebase
+
+*Telescope Image Calibration*
+Once the user has uploaded their FIT files, the image is calibrated using the Python package AstroPy. The script uses two directories, one for the raw science images (raw_directory), and one for the calibrated combined files (calibration_directory). The raw science images are calibrated by substracting the combined bias file and combined dark file, and then dividing by the combined flat file in the matching colour filter (red, blue, or green). The calibrated science images are combined to create a colour image. The output of the script is a jpeg file of the telescope image.  
 
 ### References
 
@@ -16,5 +25,8 @@ By leveraging AstroPy packages, we can simplify the image calibration process fo
 [^Middlebury]: Middlebury College, *Mittleman Observatory* https://sites.middlebury.edu/observatory/
 
 [^Robitaille2013]: Robitaille, T. et. al. *Astropy: A community Python Package for Astronomy* A&A, 558 (2013) A33 DOI: https://doi.org/10.1051/0004-6361/201322068
+
+
+
 
 [^Shupe2018]: Shupe, D., F. Masci, R. Laher, B. Rusholme, L. Armus. *Practical Applications of Astropy*. PROC. OF THE 17th PYTHON IN SCIENCE CONF. (SCIPY 2018) https://www.youtube.com/watch?v=2GTLkH5sfJc
