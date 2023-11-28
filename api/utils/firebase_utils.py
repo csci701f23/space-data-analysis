@@ -5,8 +5,10 @@ from google.cloud.storage import Client, transfer_manager
 class Connector:
     def __init__(self):
 
-        self.cred = credentials.Certificate("api/utils/serviceAccountKey.json")
-        firebase_admin.initialize_app(self.cred,{'storageBucket': 'space-data-analysis.appspot.com'})
+        # Check if firebase has already been initialized:
+        if not firebase_admin._apps:
+            self.cred = credentials.Certificate("api/utils/serviceAccountKey.json")
+            firebase_admin.initialize_app(self.cred,{'storageBucket': 'space-data-analysis.appspot.com'})
 
     def download(self, filename):
         # Establish path where data is stored on firebase

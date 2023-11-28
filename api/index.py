@@ -64,7 +64,7 @@ def CombineImages(uniqueID):
 
     # Remove when done
     shutil.rmtree(f"api/temp/{uniqueID}")
-    return jsonify("WORKING!!")
+    return jsonify(f"WORKING!! Find File at {output_path}")
     
 
 if __name__ == '__main__':
