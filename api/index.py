@@ -5,16 +5,20 @@ from utils.serialize import Serializer
 import os
 import shutil
 from calibration.createRGB import create_rgb
+from flask_cors import CORS
+import time
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/ping', methods=['GET'])
 def ping():
-    response_dict = {"Ping": "Pong"}
     
+    response = "pong"
+        
     # Serializer Class
     serializer = Serializer()
-    response = serializer.ping_output(response_dict)
+    response = serializer.ping_output(response)
     return response
 
 

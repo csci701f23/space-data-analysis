@@ -30,18 +30,18 @@ export default function Calibrate() {
     }
   };
 
-  const handleCalibration = () => {
-    return fetch(`/api/combine/${uniqueID}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Something went wrong");
-        }
-        return response.json();
-      })
-      .catch((err) => {
-        console.error(err);
+  const handleCalibration = async () => {
+    try {
+      const response = await fetch(`/api/combine/${uniqueID}`);
+
+      if (!response.ok) {
         throw new Error("Something went wrong");
-      });
+      }
+      return response.json;
+    } catch (err) {
+      console.error(err);
+      throw new Error("Something went wrong");
+    }
   };
 
   return (
