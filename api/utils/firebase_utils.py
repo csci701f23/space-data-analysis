@@ -29,3 +29,11 @@ class Connector:
             destination_file_name = f"{local_dir_path}/{blob.name.split('/')[-1]}"
             blob.download_to_filename(destination_file_name)
             print(f"Downloaded {blob.name} to {destination_file_name}")
+
+    # This function needs work
+    def upload_result(self, local_image_path, uniqueID):
+        bucket = storage.bucket() 
+        output_path = f"results/{uniqueID}/output.png"
+        blob = bucket.blob(output_path)
+        blob.upload_from_filename(local_image_path)
+        return 200, output_path

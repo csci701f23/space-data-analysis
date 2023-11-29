@@ -2,9 +2,11 @@
 import React, { useState, useMemo } from "react";
 import UploadRaw from "../components/uploadRaw";
 import { v4 } from "uuid";
+import Image from 'next/image'
 
 export default function Calibrate() {
   const [currentStep, setCurrentStep] = useState("red");
+  const [outputPath, setOutputPath] = useState("")
   const uniqueID = useMemo(() => v4(), []);
 
   const handleContinue = () => {
@@ -22,11 +24,13 @@ export default function Calibrate() {
       setCurrentStep("greenFlat");
     } else if (currentStep === "greenFlat") {
       setCurrentStep("blueFlat");
-    } else {
+    } else if (currentStep === "blueFlat"){
       setCurrentStep("calibrate");
       handleCalibration().then((data) => {
-        console.log(data);
+        console.log(data)
       });
+    } else {
+      setCurrentStep("displayImage")
     }
   };
 
@@ -37,7 +41,11 @@ export default function Calibrate() {
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
-      return response.json;
+      const data = await response.json();
+      setOutputPath(data);
+      handleContinue() 
+      return data;
+    
     } catch (err) {
       console.error(err);
       throw new Error("Something went wrong");
@@ -121,7 +129,21 @@ export default function Calibrate() {
         />
       )}
 
-      {currentStep === "calibrate" && <div>THANK YOU!</div>}
+      {currentStep === "calibrate" && 
+      <div>Hold tight. Your image is being calibrated.</div>
+      }
+
+      {currentStep === "displayImage" && 
+      <div>
+        
+      <Image
+        src={outputPath}
+        width={500}
+        height={500}
+        alt="Picture of the rendered image"
+    />
+      </div>
+      }
     </div>
   );
 }

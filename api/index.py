@@ -63,12 +63,15 @@ def CombineImages(uniqueID):
     connector.download_folder(f"calibrate/{uniqueID}/combined", combined_path)
 
     # Calibrate Image
-    output_path = create_rgb(raw_path, combined_path, "api/output.png")
-    print(output_path)
-
-    # Remove when done
+    output_path = create_rgb(raw_path, combined_path, f"public/{uniqueID}.png")
     shutil.rmtree(f"api/temp/{uniqueID}")
-    return jsonify(f"WORKING!! Find File at {output_path}")
+    return jsonify(output_path)
+    
+    # Upload image back to firebase
+    #message, result_path = connector.upload_result(output_path, uniqueID)
+
+    #if message == 200:      
+        #return jsonify(result_path)
     
 
 if __name__ == '__main__':
