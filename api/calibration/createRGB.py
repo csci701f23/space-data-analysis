@@ -59,8 +59,8 @@ https://docs.astropy.org/en/stable/visualization/rgb.html
  
 ###################################### LOAD PACKAGES ####################################
 
-from astronomyRGB import calibrate_images
-from astronomyRGB import combineRGB
+from calibration.astronomyRGB import calibrate_images
+from calibration.astronomyRGB import combineRGB
 
 
 ############################ CALL astronomyRGB FUNCTIONS ################################

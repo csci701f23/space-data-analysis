@@ -1,23 +1,24 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
+import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../db/firebase";
 
 type UploadRawProps = {
-  color: String;
+  imageType: String;
   tailwindColor: String;
   onNext: () => void;
+  uniqueID: any;
+  imageFolder: String;
 };
 
 const UploadRaw: React.FC<UploadRawProps> = ({
-  color,
+  imageType,
   tailwindColor,
   onNext,
+  uniqueID,
+  imageFolder,
 }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadError, setUploadError] = useState(false);
-
-  // Create new components for the pages
 
   // Initialize Firebase
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,9 +27,19 @@ const UploadRaw: React.FC<UploadRawProps> = ({
   };
 
   const handleUpload = () => {
+    // First check if there is a selected file, otherwise give error
     if (selectedFile) {
-      const fileName = selectedFile.name + v4();
-      const imageRef = ref(storage, `fits/${fileName}`);
+      //Extract the file name
+      const fileName = selectedFile.name;
+
+      //Make the upload path for the file
+      // The file will go to the meta folder "calibrate"
+      // and then go to the uniqueID, be given the correct classifier
+      // for the type of image and finally be given the filename
+      const imageRef = ref(
+        storage,
+        `calibrate/${uniqueID}/${imageFolder}/${fileName}`
+      );
 
       uploadBytes(imageRef, selectedFile)
         .then(() => {
@@ -47,10 +58,18 @@ const UploadRaw: React.FC<UploadRawProps> = ({
 
   return (
     <div className="m-5">
-      <h1 className="text-2xl">
-        Select your raw science image in the{" "}
-        <span className={`${tailwindColor}`}>{color}</span> filter.
-      </h1>
+      {imageFolder === "raw_science" && (
+        <h1 className="text-2xl">
+          Select your raw science image in the{" "}
+          <span className={`${tailwindColor}`}>{imageType}</span>.
+        </h1>
+      )}
+      {imageFolder === "combined" && (
+        <h1 className="text-2xl">
+          Select your combined{" "}
+          <span className={`${tailwindColor}`}>{imageType}</span> image.
+        </h1>
+      )}
       <div className="relative rounded-md shadow-sm m-5">
         <input
           type="file"

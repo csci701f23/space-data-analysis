@@ -22,9 +22,12 @@ from astropy.nddata import CCDData
 # open file
 
 def read_image(image_path):
-    ccd = CCDData.read(image_path, unit='adu')
+    ccd = CCDData.read(image_path, unit='adu', format="fits")
     imageType = ccd.meta['imagetyp']
-    #print('Filter:', ccd.meta['filter'])
+    print('Filter:', ccd.meta['filter'])
     temp = ccd.meta['ccd-temp'], 'degrees Celsius'
     exposureTime = ccd.meta['exptime']
     return {"imageType" : imageType, "temp": temp, "exposure": exposureTime}
+
+info = read_image("cs701-files/data/calibration-images/combined-flats/combined_flat_Green-cropped.fit")
+print(info)

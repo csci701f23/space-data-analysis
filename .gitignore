@@ -40,6 +40,7 @@ next-env.d.ts
 **.fit
 *.jpeg
 *.pyc
+*.png
 
 cs701-files/
 

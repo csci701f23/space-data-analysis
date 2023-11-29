@@ -1,9 +1,11 @@
 "use client";
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import UploadRaw from "../components/uploadRaw";
+import { v4 } from "uuid";
 
 export default function Calibrate() {
   const [currentStep, setCurrentStep] = useState("red");
+  const uniqueID = useMemo(() => v4(), []);
 
   const handleContinue = () => {
     if (currentStep === "red") {
@@ -11,39 +13,115 @@ export default function Calibrate() {
     } else if (currentStep === "green") {
       setCurrentStep("blue");
     } else if (currentStep === "blue") {
-      // Here is where we can perform next steps including
-      // more calibration uploads or calling python scripts to
-      // calibrate the images
-      // We will have to be very specific where we upload the images in
-      // terms of naming conventions so we can grab them + calibrate later
-      setCurrentStep("nextComponent");
+      setCurrentStep("bias");
+    } else if (currentStep === "bias") {
+      setCurrentStep("dark");
+    } else if (currentStep === "dark") {
+      setCurrentStep("redFlat");
+    } else if (currentStep === "redFlat") {
+      setCurrentStep("greenFlat");
+    } else if (currentStep === "greenFlat") {
+      setCurrentStep("blueFlat");
+    } else {
+      setCurrentStep("calibrate");
+      handleCalibration().then((data) => {
+        console.log(data);
+      });
     }
+  };
+
+  const handleCalibration = () => {
+    return fetch(`/api/combine/${uniqueID}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        return response.json();
+      })
+      .catch((err) => {
+        console.error(err);
+        throw new Error("Something went wrong");
+      });
   };
 
   return (
     <div>
       {currentStep === "red" && (
         <UploadRaw
-          color={"RED"}
+          imageType={"RED FILTER"}
           tailwindColor={"text-red-500"}
           onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"raw_science"}
         />
       )}
       {currentStep === "green" && (
         <UploadRaw
-          color={"GREEN"}
+          imageType={"GREEN FILTER"}
           tailwindColor={"text-green-500"}
           onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"raw_science"}
         />
       )}
       {currentStep === "blue" && (
         <UploadRaw
-          color={"BLUE"}
+          imageType={"BLUE FILTER"}
           tailwindColor={"text-blue-500"}
           onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"raw_science"}
         />
       )}
-      {currentStep === "nextComponent" && <div>THANK YOU!</div>}
+      {currentStep === "bias" && (
+        <UploadRaw
+          imageType={"BIAS"}
+          tailwindColor={"text-white"}
+          onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"combined"}
+        />
+      )}
+      {currentStep === "dark" && (
+        <UploadRaw
+          imageType={"DARK"}
+          tailwindColor={"text-white"}
+          onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"combined"}
+        />
+      )}
+      {currentStep === "redFlat" && (
+        <UploadRaw
+          imageType={"RED FLAT"}
+          tailwindColor={"text-red-500"}
+          onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"combined"}
+        />
+      )}
+
+      {currentStep === "greenFlat" && (
+        <UploadRaw
+          imageType={"GREEN FLAT"}
+          tailwindColor={"text-green-500"}
+          onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"combined"}
+        />
+      )}
+
+      {currentStep === "blueFlat" && (
+        <UploadRaw
+          imageType={"BLUE FLAT"}
+          tailwindColor={"text-blue-500"}
+          onNext={handleContinue}
+          uniqueID={uniqueID}
+          imageFolder={"combined"}
+        />
+      )}
+
+      {currentStep === "calibrate" && <div>THANK YOU!</div>}
     </div>
   );
 }
