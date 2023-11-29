@@ -28,7 +28,7 @@ def FirebaseConnection(filename):
     # Perform necessary operations with data
     imageInfo = read_image(f"api/{filename}")
     os.remove(f"api/{filename}")
-    print(jsonify(imageInfo))
+    #print(jsonify(imageInfo))
     return jsonify(imageInfo)
 
 

@@ -28,6 +28,3 @@ def read_image(image_path):
     temp = ccd.meta['ccd-temp'], 'degrees Celsius'
     exposureTime = ccd.meta['exptime']
     return {"imageType" : imageType, "temp": temp, "exposure": exposureTime}
-
-info = read_image("cs701-files/data/calibration-images/combined-flats/combined_flat_Green-cropped.fit")
-print(info)
