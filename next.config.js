@@ -13,7 +13,7 @@ const nextConfig = {
     domains: ["firebasestorage.googleapis.com"],
   },
   experimental: {
-    proxyTimeout: 10000000,
+    proxyTimeout: 10000000000000,
   },
 };
 

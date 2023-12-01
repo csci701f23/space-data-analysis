@@ -2,14 +2,14 @@
 import React, { useState, useMemo } from "react";
 import UploadRaw from "../components/uploadRaw";
 import { v4 } from "uuid";
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Calibrate() {
   const [currentStep, setCurrentStep] = useState("red");
-  const [outputPath, setOutputPath] = useState("")
+  const [outputPath, setOutputPath] = useState("");
   const uniqueID = useMemo(() => v4(), []);
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (currentStep === "red") {
       setCurrentStep("green");
     } else if (currentStep === "green") {
@@ -24,13 +24,15 @@ export default function Calibrate() {
       setCurrentStep("greenFlat");
     } else if (currentStep === "greenFlat") {
       setCurrentStep("blueFlat");
-    } else if (currentStep === "blueFlat"){
-      setCurrentStep("calibrate");
-      handleCalibration().then((data) => {
-        console.log(data)
-      });
-    } else {
-      setCurrentStep("displayImage")
+    } else if (currentStep === "blueFlat") {
+      // All files have been uploaded
+      try {
+        const data = await handleCalibration();
+        setOutputPath(data);
+        setCurrentStep("displayImage");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -42,10 +44,7 @@ export default function Calibrate() {
         throw new Error("Something went wrong");
       }
       const data = await response.json();
-      setOutputPath(data);
-      handleContinue() 
       return data;
-    
     } catch (err) {
       console.error(err);
       throw new Error("Something went wrong");
@@ -129,21 +128,20 @@ export default function Calibrate() {
         />
       )}
 
-      {currentStep === "calibrate" && 
-      <div>Hold tight. Your image is being calibrated.</div>
-      }
+      {currentStep === "calibrate" && (
+        <div>Hold tight. Your image is being calibrated.</div>
+      )}
 
-      {currentStep === "displayImage" && 
-      <div>
-        
-      <Image
-        src={outputPath}
-        width={500}
-        height={500}
-        alt="Picture of the rendered image"
-    />
-      </div>
-      }
+      {currentStep === "displayImage" && (
+        <div>
+          <Image
+            src={outputPath}
+            width={500}
+            height={500}
+            alt="Picture of the rendered image"
+          />
+        </div>
+      )}
     </div>
   );
 }
