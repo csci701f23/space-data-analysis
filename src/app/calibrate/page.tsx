@@ -28,7 +28,7 @@ export default function Calibrate() {
       // All files have been uploaded
       try {
         const data = await handleCalibration();
-        setOutputPath(data);
+        setOutputPath("/" + data);
         setCurrentStep("displayImage");
       } catch (error) {
         console.error(error);
