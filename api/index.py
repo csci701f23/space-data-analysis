@@ -5,16 +5,20 @@ from utils.serialize import Serializer
 import os
 import shutil
 from calibration.createRGB import create_rgb
+from flask_cors import CORS
+import time
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/ping', methods=['GET'])
 def ping():
-    response_dict = {"Ping": "Pong"}
     
+    response = "pong"
+        
     # Serializer Class
     serializer = Serializer()
-    response = serializer.ping_output(response_dict)
+    response = serializer.ping_output(response)
     return response
 
 
@@ -28,7 +32,7 @@ def FirebaseConnection(filename):
     # Perform necessary operations with data
     imageInfo = read_image(f"api/{filename}")
     os.remove(f"api/{filename}")
-    print(jsonify(imageInfo))
+    #print(jsonify(imageInfo))
     return jsonify(imageInfo)
 
 
@@ -58,14 +62,14 @@ def CombineImages(uniqueID):
     connector.download_folder(f"calibrate/{uniqueID}/raw_science", raw_path)
     connector.download_folder(f"calibrate/{uniqueID}/combined", combined_path)
 
-    # Calibrate Image
-    output_path = create_rgb(raw_path, combined_path, "api/output.png")
-    print(output_path)
+    # Calibrate Imag
 
-    # Remove when done
+    output_path = f"public/{uniqueID}.png"
+    src_path = f"/{uniqueID}.png"
+    create_rgb(raw_path, combined_path, output_path)
     shutil.rmtree(f"api/temp/{uniqueID}")
-    return jsonify("WORKING!!")
-    
+    return jsonify(src_path)
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5328)
