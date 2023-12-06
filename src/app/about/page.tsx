@@ -7,8 +7,8 @@ import observatory from "./observatory.jpg"
 export default function Page() {
   return (
     <main className={styles.main}>
-        <Link href={"/"}>Back to home</Link>
-    <div  className='m-5 p-4 text-justify text-gray-300'>
+        <Link href={"/"} className= {styles.linkStyle} >Back to home</Link>
+    <div  className='m-5 p-4 text-justify textColor}'>
       <div className='text-xl bg-[#1825CA]/70 text-gray font-bold text-justify'> About </div>
       <br />
       <p className='text-md'> Mittleman Observatory at Middlebury College is the “largest and best equipped” institution observatory in the state of Vermont. The aim of this project is to make the Middlebury telescope more accessible to Middlebury students. Many students do not know how to utilize the resources that the telescope provides, and there is currently no streamlined way to process telescope images. 
