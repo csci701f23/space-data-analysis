@@ -19,11 +19,13 @@ export default function Gallery() {
 
     if (selectedFile) {
 
-      const imageRef = ref(storage, `images/${selectedFile.name + v4()}`)
+      const imageRef = ref(storage, `fits/${selectedFile.name + v4()}`)
 
       uploadBytes(imageRef, selectedFile).then(() => {
         alert("Image Uploaded")
       })
+
+
     }
   };
 
@@ -43,13 +45,26 @@ useEffect(() => {
 
   // NEED TO STYLE THE GALLERY
   return (
-    <div>
-      <input type="file" accept="image/gif, image/jpeg, image/png" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+    <div className='m-5'>
+      <h1 className='text-2xl'>Welcome to the Gallery!</h1>
+      <div className="relative rounded-md shadow-sm m-5">
+        <input type="file" onChange={handleFileChange} className="sr-only" id="fileInput" />
 
+        <label htmlFor="fileInput" className="cursor-pointer bg-indigo-500 text-white px-4 py-2 rounded-md border border-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring focus:border-indigo-700 active:bg-indigo-700">
+          Choose a File
+        </label>
+      </div>
+      
+      <div className='m-5'>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleUpload}>Upload</button>
+      </div>
+      
+      <div className= "grid grid-cols-3 gap-4 items-center justify-center m-30">
       {imageList.map((url, index) => {
         return <Image src={url} key={index} alt='Images' width={300} height={200}/>
       })}
+      </div>
+
     </div>
 
 
