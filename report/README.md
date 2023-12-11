@@ -13,6 +13,8 @@ By leveraging AstroPy packages, we can simplify the image calibration process fo
 ### Methodology 
 *How to use*
 
+![](images/img_methodology.png)
+
 Frontend: 
 We used the Next.js React framework to develop our web application, with Tailwind CSS for styling. We created individual pages for the image calibration process, gallery, a section detailing how to complete the calibration process and a section explaining our motivation behind this project. 
 
