@@ -23,7 +23,6 @@ We used the Next.js React framework to develop our web application, with Tailwin
 Backend:
 In the backend we created python scripts that utilize the AstroPy library. These scripts are integrated with our frontend using Flask. Additionally, we use Firebase to store the gallery images and the .fit files that are uploaded as a part of our calibration process. 
 
-
 *Telescope Image Calibration*
 
 The image calibration process begins with the combination of raw bias, dark, and flat files into combined files through a series of combination and subtraction steps. Generally, bias and dark frames can be stable for several months, so long as the temperature and exposure times match the science image, but flat images need to be taken of the twilight sky the same night as the science image.
@@ -43,7 +42,7 @@ This fall we were able to successfully create our web application with a functio
 
 One limitation we faced throughout the semester was the Firebase plan that we opted to use. While the free plan worked for our development and testing stages, it does not include sufficient bandwidth or storage to accommodate more than a few image calibrations in a day. If this were to be widely used by students or members of the observatory, the plan would have to be updated. 
 
-To expand this project, we would like to have the option to extend the pipeline and start with the individual bias dark and flat files and perform the combinations. This would allow students to solely use our platform to calibrate their images. Additionally, there are certain parameters that have been set to default values for our pipeline (such as the softening value and the stretch parameter). In the future allowing users to customize these values could be beneficial and allow students to customize their images. 
+To expand this project, we would like to have the option to extend the pipeline and start with the individual bias dark and flat files and perform the combinations. This would allow students to solely use our platform to calibrate their images. Additionally, there are certain parameters that have been set to default values for our pipeline (such as the softening value and the stretch parameter).In the future allowing users to change these values could be beneficial and allow students to customize their images. In future, the web app could also be expanded to allow for the further analysis of the images, perhaps allowing users to investigate individual pixels. 
 
 
 ### Acknowledgements
