@@ -1,0 +1,44 @@
+.linkStyle {
+    text-decoration: none;
+    color: navy;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-style: double;
+    border-width: 4px; 
+    border-color: navy;
+    border-radius: 8px;
+    display: inline-block; /*has link behave like a block object*/
+    transition: border-color 0.3s;
+}
+.linkStyle:hover{
+    border-color: blue;
+    color: blue;
+}
+
+.headerStyle{
+    font-size: 24px;
+}
+
+.textStyle {
+    margin: 20px 40px 25px 40px;
+    padding: 4px;
+    color: navy;
+    @media (prefers-color-scheme: dark) {
+        color: gainsboro;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .linkStyle{
+        color: gainsboro;
+        border-color: gainsboro;
+    }
+    .linkStyle:hover{
+        border-color: lightblue;
+        color: lightblue;
+    }
+}
+
+
+
