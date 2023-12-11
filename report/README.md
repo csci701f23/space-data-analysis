@@ -13,10 +13,30 @@ By leveraging AstroPy packages, we can simplify the image calibration process fo
 ### Methodology 
 *How to use*
 
-- Node, Flask, Firebase
+Frontend: 
+We used the Next.js React framework to develop our web application, with Tailwind CSS for styling. We created individual pages for the image calibration process, gallery, a section detailing how to complete the calibration process and a section explaining our motivation behind this project. 
+
+Backend:
+In the backend we created python scripts that utilize the AstroPy library. These scripts are integrated with our frontend using Flask. Additionally, we use Firebase to store the gallery images and the .fit files that are uploaded as a part of our calibration process. 
+
 
 *Telescope Image Calibration*
-Once the user has uploaded their FIT files, the image is calibrated using the Python package AstroPy. The script uses two directories, one for the raw science images (raw_directory), and one for the calibrated combined files (calibration_directory). The raw science images are calibrated by substracting the combined bias file and combined dark file, and then dividing by the combined flat file in the matching colour filter (red, blue, or green). The calibrated science images are combined to create a colour image. The output of the script is a jpeg file of the telescope image.  
+The image calibration process begins with the combination of raw bias, dark, and flat files into combined files through a series of combination and subtraction steps. Generally, bias and dark frames can be stable for several months, so long as the temperature and exposure times match the science image, but flat images need to be taken of the twilight sky the same night as the science image.
+
+To calibrate an image, the user will upload 8 files: 3 Raw Science Images (Red, Green, and Blue), a combined Bias FITS file, a combined Dark FITS file, and 3 combined Flat FITS files (Red, Green, and Blue). Once the user has uploaded their  files to our web app, the image is calibrated using the Python package AstroPy. 
+
+The script uses two directories, one for the raw science images and one for the calibrated combined files. The raw science images are calibrated by subtracting the combined bias file and combined dark file, and then dividing by the combined flat file in the matching colour filter (red, blue, or green). The calibrated science images are then combined to create a colour image. The output of the script is a png file of the telescope image.
+
+### Results and Future Work
+This fall we were able to successfully create our web application with a functioning pipeline to calibrate telescope images starting with the raw science images and five combined files. We also implemented a gallery for students to upload their own images and share with peers.
+
+One limitation we faced throughout the semester was the Firebase plan that we opted to use. While the free plan worked for our development and testing stages, it does not include sufficient bandwidth or storage to accommodate more than a few image calibrations in a day. If this were to be widely used by students or members of the observatory, the plan would have to be updated. 
+
+To expand this project, we would like to have the option to extend the pipeline and start with the individual bias dark and flat files and perform the combinations. This would allow students to solely use our platform to calibrate their images. Additionally, there are certain parameters that have been set to default values for our pipeline (such as the softening value and the stretch parameter). In the future allowing users to customize these values could be beneficial and allow students to customize their images. 
+
+
+### Acknowledgements
+We would like to thank Professor Catherine Miller for her guidance throughout this project, for providing us with telescope image data, and the AstroPy Python scripts for image calibration processing. We would like to thank Professor Philip Caplan for his support and assistance this semester.  
 
 ### References
 
@@ -25,8 +45,6 @@ Once the user has uploaded their FIT files, the image is calibrated using the Py
 [^Middlebury]: Middlebury College, *Mittleman Observatory* https://sites.middlebury.edu/observatory/
 
 [^Robitaille2013]: Robitaille, T. et. al. *Astropy: A community Python Package for Astronomy* A&A, 558 (2013) A33 DOI: https://doi.org/10.1051/0004-6361/201322068
-
-
 
 
 [^Shupe2018]: Shupe, D., F. Masci, R. Laher, B. Rusholme, L. Armus. *Practical Applications of Astropy*. PROC. OF THE 17th PYTHON IN SCIENCE CONF. (SCIPY 2018) https://www.youtube.com/watch?v=2GTLkH5sfJc
