@@ -1,5 +1,7 @@
 ### Mittleman Observatory Image Calibration (maybe update title)
 
+![](images/img_space.png)
+
 ### Introduction 
 
 Mittelman Observatory at Middlebury College is the “largest and best equipped”[^Middlebury] institution observatory in the state of Vermont. The aim of this project is to make the Middlebury telescope more accessible to Middlebury students. Many students do not know how to utilize the resources that the telescope provides, and there is currently no streamlined way to process telescope images. 
@@ -23,14 +25,21 @@ In the backend we created python scripts that utilize the AstroPy library. These
 
 
 *Telescope Image Calibration*
+
 The image calibration process begins with the combination of raw bias, dark, and flat files into combined files through a series of combination and subtraction steps. Generally, bias and dark frames can be stable for several months, so long as the temperature and exposure times match the science image, but flat images need to be taken of the twilight sky the same night as the science image.
 
 To calibrate an image, the user will upload 8 files: 3 Raw Science Images (Red, Green, and Blue), a combined Bias FITS file, a combined Dark FITS file, and 3 combined Flat FITS files (Red, Green, and Blue). Once the user has uploaded their  files to our web app, the image is calibrated using the Python package AstroPy. 
 
+![](images/img_telescope_process.png)
+
 The script uses two directories, one for the raw science images and one for the calibrated combined files. The raw science images are calibrated by subtracting the combined bias file and combined dark file, and then dividing by the combined flat file in the matching colour filter (red, blue, or green). The calibrated science images are then combined to create a colour image. The output of the script is a png file of the telescope image.
+
+![](images/img_rgb.png)
 
 ### Results and Future Work
 This fall we were able to successfully create our web application with a functioning pipeline to calibrate telescope images starting with the raw science images and five combined files. We also implemented a gallery for students to upload their own images and share with peers.
+
+![](images/img_frontend.png)
 
 One limitation we faced throughout the semester was the Firebase plan that we opted to use. While the free plan worked for our development and testing stages, it does not include sufficient bandwidth or storage to accommodate more than a few image calibrations in a day. If this were to be widely used by students or members of the observatory, the plan would have to be updated. 
 
