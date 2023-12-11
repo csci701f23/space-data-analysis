@@ -30,11 +30,11 @@ Once you have the web app running, use the get started page to calibrate your im
 
 You will be prompted to upload your .FITs files one by one
 
-![Alt text](readme2.png "image upload prompt")
+![Alt text](readme3.png "image upload prompt")
 
 The tutorial page lists all the required files for the calibration process 
 
-![Alt text](readme3.png "home page, tutorial")
+![Alt text](readme2.png "home page, tutorial")
 
 
 // need most updated tutorial page screenshot 
