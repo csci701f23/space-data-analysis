@@ -10,12 +10,14 @@ Dependencies :
 - ```git``` 
 - ```flask```
 - ```node```
+- ```python``` and ```javaScript```
 - ```AstroPy```
 
 Cloning the repository:
 - ```$ git clone git@github.com:csci701f23/space-data-analysis.git```
 - 
 - ```$ npm install```
+- ```$ python3 install -r requirements.txt```
 
 Running the Web App:
 - ```$ npm run dev```
