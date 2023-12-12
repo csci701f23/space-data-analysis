@@ -12,7 +12,7 @@ const DisplayImage: React.FC<displayImageProps> = ({ imagePath }) => {
     setShowDownload(true);
   };
   return (
-    <div className="flex items-center">
+    <div className="flex py-20 justify-center items-center">
       <Image
         src={imagePath}
         width={500}
