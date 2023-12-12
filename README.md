@@ -12,6 +12,7 @@ Dependencies :
 - ```git``` 
 - ```flask```
 - ```node```
+- ```AstroPy```
 
 Running the Web App:
 - ```$ npm install```
