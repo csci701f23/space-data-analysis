@@ -5,26 +5,26 @@
 ## Abstract 
 
 ## How to 
-
-- clone repository 
-
 Dependencies :
 - ```git``` 
 - ```flask```
 - ```node```
 - ```AstroPy```
 
-Running the Web App:
+Cloning the repository
+- ```$ git clone git@github.com:csci701f23/space-data-analysis.git```
+- 
 - ```$ npm install```
+
+Running the Web App:
 - ```$ npm run dev```
 this will deploy the web page
 then, open a second terminal and run 
 - ```$ python api/index.py```
-this will start the flask server so that the pipeline will function 
+this will start the flask server so that the pipeline and gallery will function 
 
 
 ## Examples
-
 Once you have the web app running, use the get started page to calibrate your images 
 
 ![Alt text](readme1.png "home page, get started")
@@ -37,9 +37,7 @@ The tutorial page lists all the required files for the calibration process
 
 ![Alt text](readme2.png "home page, tutorial")
 
-
-// need most updated tutorial page screenshot 
-
+![Alt text](readme4.png "tutorial page")
 
 
 ## Acknowledgements 
@@ -47,5 +45,5 @@ We would like to thank Professor Catherine Miller at the Mittelman Observatory f
 We would like to thank Professor Philip Caplan for his support and instruction this semester. 
 
 ## License
-
-
+All Mittelman Observatory Image Calibration source code is distributed under the MIT License. 
+Copyright 2023 Catie Baxter, Johnny Kantaros and Lila Kosowsky
