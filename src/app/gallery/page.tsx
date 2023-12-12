@@ -1,6 +1,8 @@
 "use client"
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import Image from 'next/image';
+import styles from "./styles.module.css"
+import Link from 'next/link'
 import {ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 import {storage} from '../../../db/firebase'
@@ -45,6 +47,8 @@ useEffect(() => {
 
   // NEED TO STYLE THE GALLERY
   return (
+    <main className={styles.main}>
+       <Link href={"/"} className = {styles.linkStyle}>Back to home</Link>
     <div className='m-5'>
       <h1 className='text-2xl'>Welcome to the Gallery!</h1>
       <div className="relative rounded-md shadow-sm m-5">
@@ -66,6 +70,8 @@ useEffect(() => {
       </div>
 
     </div>
+    </main>
+
 
 
   );
