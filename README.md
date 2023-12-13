@@ -12,6 +12,7 @@ Dependencies :
 - ```node```
 - ```python``` and ```javaScript```
 - ```AstroPy```
+- ```Tailwind CSS```
 
 Cloning the repository:
 - ```$ git clone git@github.com:csci701f23/space-data-analysis.git```
