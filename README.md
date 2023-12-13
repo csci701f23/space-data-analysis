@@ -16,7 +16,6 @@ Dependencies :
 
 Cloning the repository:
 - ```$ git clone git@github.com:csci701f23/space-data-analysis.git```
-- 
 - ```$ npm install```
 - ```$ python3 install -r requirements.txt```
 
@@ -50,4 +49,5 @@ We would like to thank Professor Philip Caplan for his support and instruction t
 
 ## License
 All Mittelman Observatory Image Calibration source code is distributed under the MIT License. 
+
 Copyright 2023 Catie Baxter, Johnny Kantaros and Lila Kosowsky
