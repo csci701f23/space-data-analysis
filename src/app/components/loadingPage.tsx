@@ -1,10 +1,9 @@
-"use client";
 import React from "react";
 
-export default function ApiTest() {
+export default function Load() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <div className="text-black mb-4">Loading your image...</div>
+      <div className="text-black mb-4">Calibrating your image...</div>
       <div className="relative">
         <svg
           aria-hidden="true"
