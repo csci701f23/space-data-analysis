@@ -14,6 +14,7 @@ Science image calibration requires three additional types of raw data files: bia
 
 AstroPy is an open-sourced python package for astronomers that was developed starting in 2011. The package includes tools to simplify processes necessary for image calibration including input and output functionality for FITS files, world coordinate systems in images, cosmological calculations, manipulation of numerical quantities, and the ability for interactive analysis of telescope data[^Robitaille2013]. Currently, the observatory has developed scripts that use AstroPy for the calibration process and our webapp will provide students with the ability to utilize these scripts. In a similar case, an iPython widget was developed for a telescope at the Minnesota State University Moorhead. The goal was to create an easy application for students to calibrate their images with. While the widget format differs from our web app, this case shows the effectiveness of creating a webapp allowing students without programming background to interface with existing python scripts and avoid the need to download and compile them on their machines[^Craig2015]. Our pipeline takes care of passing the image files to the scripts and eliminates the chance of students encountering programming bugs. 
 
+By leveraging AstroPy packages, we can simplify the image calibration process for the Mittelman Observatory. 
 
 ### Methodology 
 <img src="images/img_methodology.png">

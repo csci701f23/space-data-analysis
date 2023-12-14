@@ -30,8 +30,10 @@ export default function Page() {
             <br />
             <p className='text-sm'> Once you have all of these files accessible, click the Get Started button on the home screen.
             <br /> This will instruct you to upload each image one by one. 
-            <br /> Once all the images have been uploaded, you will see a ‘thank you’ message. This means that the script to calibrate the image is running. 
-            <br /> Be patient, this may take a second. </p> 
+            <br /> Once all the images have been uploaded, you will see a loading screen. This means that the script to calibrate the image is running. 
+            <br /> Be patient, this may take a second. 
+            <br /> Once the image is calibrated, it will appear on the screen. 
+            <br /> The image file will also appear in the /public folder of your directory. </p> 
           </div>
         </div>
     </main>

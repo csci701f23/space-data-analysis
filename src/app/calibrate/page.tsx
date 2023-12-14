@@ -2,7 +2,8 @@
 import React, { useState, useMemo } from "react";
 import UploadRaw from "../components/uploadRaw";
 import { v4 } from "uuid";
-import Image from "next/image";
+import Load from "../components/loadingPage";
+import DisplayImage from "../components/displayImage";
 
 export default function Calibrate() {
   const [currentStep, setCurrentStep] = useState("red");
@@ -25,8 +26,8 @@ export default function Calibrate() {
     } else if (currentStep === "greenFlat") {
       setCurrentStep("blueFlat");
     } else if (currentStep === "blueFlat") {
-      // All files have been uploaded
       try {
+        setCurrentStep("calibrate");
         const data = await handleCalibration();
         setOutputPath(data);
         setCurrentStep("displayImage");
@@ -128,19 +129,10 @@ export default function Calibrate() {
         />
       )}
 
-      {currentStep === "calibrate" && (
-        <div>Hold tight. Your image is being calibrated.</div>
-      )}
+      {currentStep === "calibrate" && <Load />}
 
       {currentStep === "displayImage" && (
-        <div>
-          <Image
-            src={outputPath}
-            width={500}
-            height={500}
-            alt="Picture of the rendered image"
-          />
-        </div>
+        <DisplayImage imagePath={outputPath} />
       )}
     </div>
   );
