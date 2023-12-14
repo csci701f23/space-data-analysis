@@ -1,4 +1,4 @@
-### Mittleman Observatory Image Calibration (maybe update title)
+### Mittleman Observatory Image Calibration 
 
 ![](images/img_space.png)
 
@@ -6,7 +6,7 @@
 
 Mittelman Observatory at Middlebury College is the “largest and best equipped”[^Middlebury] institution observatory in the state of Vermont. The aim of this project is to make the Middlebury telescope more accessible to Middlebury students. Many students do not know how to utilize the resources that the telescope provides, as there is currently no streamlined way to process telescope images. Students are taught to use DS9, which is a much older software and has few resources for students to learn the platform. While newly developed AstroPy scripts for calibration do exist within the observatory, being able to run these requires a compiler and knowledge of how to run python scripts. Students will be able to utilize our webapp to take advantage of AstroPy and will be walked through the steps to calibrating their images during the process.
 
-![Mittleman Observatory's Telescope](images/img_telescope.png)
+![Mittleman Observatory's Telescope](images/img_telescope.JPG)
 
 Science image calibration requires three additional types of raw data files: bias images, dark images, and flat images. These images are used to reduce noise, and find the contamination on the telescope in order to increase the accuracy of the science image. The image calibration process begins with the combination of raw files into combined files. The combined files are used to calibrate the science images, before they are aligned and combined. The combined science images are still grayscale images. To create a color image, the three combined science images (one red, one blue, one green) must be combined into a single RGB image.
 
