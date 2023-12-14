@@ -5,8 +5,8 @@ import styles from "./styles.module.css"
 export default function Page() {
   return (
     <main className={styles.main}>
-        <Link href={"/"}>Back to home</Link>
-        <div className='m-5'>
+        <Link href={"/"} className={styles.linkStyle}>Back to home</Link>
+        <div className={styles.textStyle}>
           <h1 className='text-2xl'>Welcome to the Mittelman Observtory Image Calibration Site!</h1>
           <h1 className='text-lg'>Here you will find all the steps necessary to calibrate your science images.</h1>
           <div>
@@ -30,8 +30,10 @@ export default function Page() {
             <br />
             <p className='text-sm'> Once you have all of these files accessible, click the Get Started button on the home screen.
             <br /> This will instruct you to upload each image one by one. 
-            <br /> Once all the images have been uploaded, you will see a ‘thank you’ message. This means that the script to calibrate the image is running. 
-            <br /> Be patient, this may take a second. </p> 
+            <br /> Once all the images have been uploaded, you will see a loading screen. This means that the script to calibrate the image is running. 
+            <br /> Be patient, this may take a second. 
+            <br /> Once the image is calibrated, it will appear on the screen. 
+            <br /> The image file will also appear in the /public folder of your directory. </p> 
           </div>
         </div>
     </main>
