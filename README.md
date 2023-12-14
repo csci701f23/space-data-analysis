@@ -30,20 +30,20 @@ this will start the flask server so that the pipeline and gallery will function
 ## Examples
 Once you have the web app running, use the get started page to calibrate your images 
 
-![Alt text](readme1.png "home page, get started")
+![Alt text](examples/readme1.png "home page, get started")
 
 You will be prompted to upload your .FITs files one by one
 
-![Alt text](readme3.png "image upload prompt")
+![Alt text](examples/readme3.png "image upload prompt")
 
 The tutorial page lists all the required files for the calibration process 
 
-![Alt text](readme2.png "home page, tutorial")
+![Alt text](examples/readme2.png "home page, tutorial")
 
-![Alt text](readme4.png "tutorial page")
+![Alt text](examples/readme4.png "tutorial page")
 
 ## Limitations
-When uploading .FIT files our web app does not check that each file is the file specified (combined bias file or raw file in the red filter for example), it just checks if they are a .FIT file or not. If the files are not uploaded exactly as specified the pipeline may either fail or produce an incorrect image. It is important to upload the images exactly as prompted for the desired results. 
+In the calibration pipeline our web app will not throw an error if the file type is incorrect. So, if the files are not uploaded exactly as specified the pipeline may either fail or produce an incorrect image. It is important to upload the images exactly as prompted for the desired results. 
 
 ## Acknowledgements 
 We would like to thank Professor Catherine Miller at the Mittelman Observatory for her guidance throughout this project,for providing us with telescope image data, and the AstroPy Python scripts for image calibration processing. 
