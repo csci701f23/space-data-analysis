@@ -1,20 +1,55 @@
-# [Project Title]
+# Mittelman Observatory Image Calibration 
+
 ## Middlebury College, CSCI 701 (Senior Seminar, Fall 2023)
 
-This is your main project README which will contain instructions on how to build and run your project. You can delete and overwrite the contents of this README file at any point. We'll talk about what should be included in this file later in the semester.
+## Abstract 
+In an effort to make the Mittelman Observatory telescope more accessible to students, we have created a web application to streamline the calibration process for telescope users. Our application utilizes the AstroPy python package and scripts developed by the observatory to create a calibration pipeline. Once fully functional, this pipeline will replace the need to use DS9, an outdated software that is currently used to complete the calibration process. Our current web application consists of the calibration pipeline starting from the combined images and the three raw images, a gallery to display calibrated images, a tutorial page and an about page.
 
-This initial project template contains a few workflows (defined in `.github/workflows`) to help with your project development:
+## How to 
+Dependencies :
+- ```git``` 
+- ```flask```
+- ```node```
+- ```python``` and ```javaScript```
+- ```AstroPy```
+- ```Tailwind CSS```
 
-1. `checks.yml`: A workflow that runs anytime a PR is opened, or a new commit is pushed to a branch with an open PR. At some point in the semester, please modify/add steps for the checks you wish to run (e.g. adding checks for tests & style). Your repository is configured to require all status checks to pass before merging a PR.
+Cloning the repository:
+- ```$ git clone git@github.com:csci701f23/space-data-analysis.git```
+- ```$ npm install```
+- ```$ pip install -r requirements.txt```
 
-2. `merge.yml`: A workflow that runs when a commit is pushed to the `main` branch, like when a Pull Request is merged. If you need to deploy your project, you should add some steps in this file. When this workflow succeeds, a message will be sent to your project channel in Slack.
+Running the Web App:
+- ```$ npm run dev```
+this will deploy the web page
+then, open a second terminal and run 
+- ```$ python api/index.py```
+this will start the flask server so that the pipeline and gallery will function 
 
-3. `issue.yml`: A workflow that will notify your project channel in Slack that a new Issue was created.
 
-In general, your development workflow will be to open one (or more) Issues in any given week, write the code in the coming week, and then open and merge one (or more) PRs that address the corresponding Issue(s) from the previous week. When opening an Issue & Pull Request, please complete the relevant fields in the description (the templates are defined in the `.github` directory).
+## Examples
+Once you have the web app running, use the get started page to calibrate your images 
 
-UPDATES:
+![Alt text](examples/readme1.png "home page, get started")
 
-To run the app, run the following command in the terminal:
+You will be prompted to upload your .FITs files one by one
 
-FLASK_APP=routes.py flask run
+![Alt text](examples/readme3.png "image upload prompt")
+
+The tutorial page lists all the required files for the calibration process 
+
+![Alt text](examples/readme2.png "home page, tutorial")
+
+![Alt text](examples/readme4.png "tutorial page")
+
+## Limitations
+In the calibration pipeline our web app will not throw an error if the file type is incorrect. So, if the files are not uploaded exactly as specified the pipeline may either fail or produce an incorrect image. It is important to upload the images exactly as prompted for the desired results. 
+
+## Acknowledgements 
+We would like to thank Professor Catherine Miller at the Mittelman Observatory for her guidance throughout this project,for providing us with telescope image data, and the AstroPy Python scripts for image calibration processing. 
+We would like to thank Professor Philip Caplan for his support and instruction this semester. 
+
+## License
+All Mittelman Observatory Image Calibration source code is distributed under the MIT License. 
+
+Copyright 2023 Catie Baxter, Johnny Kantaros and Lila Kosowsky
