@@ -6,7 +6,9 @@
 
 Mittelman Observatory at Middlebury College is the “largest and best equipped”[^Middlebury] institution observatory in the state of Vermont. The aim of this project is to make the Middlebury telescope more accessible to Middlebury students. Many students do not know how to utilize the resources that the telescope provides, as there is currently no streamlined way to process telescope images. Students are taught to use DS9, which is a much older software and has few resources for students to learn the platform. While newly developed AstroPy scripts for calibration do exist within the observatory, being able to run these requires a compiler and knowledge of how to run python scripts. Students will be able to utilize our webapp to take advantage of AstroPy and will be walked through the steps to calibrating their images during the process.
 
-![Mittleman Observatory's Telescope](images/img_telescope.JPG)
+![Mittleman Observatory's Telescope](images/img_telescope.JPG){width=50%}
+
+Middlebury's Observatory consists of a dome that houses a 24-inch telescope, a control room, and an observation deck that includes three smaller reflecting telescopes. 
 
 Science image calibration requires three additional types of raw data files: bias images, dark images, and flat images. These images are used to reduce noise, and find the contamination on the telescope in order to increase the accuracy of the science image. The image calibration process begins with the combination of raw files into combined files. The combined files are used to calibrate the science images, before they are aligned and combined. The combined science images are still grayscale images. To create a color image, the three combined science images (one red, one blue, one green) must be combined into a single RGB image.
 
@@ -41,7 +43,11 @@ This fall we were able to successfully create our web application with a functio
 
 One limitation we faced throughout the semester was the Firebase plan that we opted to use. While the free plan worked for our development and testing stages, it does not include sufficient bandwidth or storage to accommodate more than a few image calibrations in a day. If this were to be widely used by students or members of the observatory, the plan would have to be updated. 
 
-To expand this project, we would like to have the option to extend the pipeline and start with the individual bias dark and flat files and perform the combinations. This would allow students to solely use our platform to calibrate their images. Additionally, there are certain parameters that have been set to default values for our pipeline (such as the softening value and the stretch parameter).In the future allowing users to change these values could be beneficial and allow students to customize their images. In future, the web app could also be expanded to allow for the further analysis of the images, perhaps allowing users to investigate individual pixels. 
+To expand this project, we would like to have the option to extend the pipeline and start with the individual bias dark and flat files and perform the combinations. This would allow students to solely use our platform to calibrate their images. Additionally, there are certain parameters that have been set to default values for our pipeline (such as the softening value and the stretch parameter).In the future allowing users to change these values could be beneficial and allow students to customize their images. In future, the web app could also be expanded to allow for the further analysis of the images, perhaps allowing users to investigate individual pixels.
+
+The webapp could also be expanded to include some of the basic functionalities used by Astronomy students to edit their image, particularly in terms of scaling their images. Being able to adjust the dynamic range for the different filters to shorten the light scale between the brightness of their min and max pixel as opposed to the defualt scale would allow users to see their object in more detail and bring out the features they want to see. 
+
+![](images/img_dynamicrange.png)
 
 
 ### Acknowledgements
