@@ -12,14 +12,12 @@ AstroPy is an open-sourced python package for astronomers that was developed sta
 
 
 ### Methodology 
-*How to use*
-
 ![](images/img_methodology.png)
 
-Frontend: 
-We used the Next.js React framework to develop our web application, with Tailwind CSS for styling. We created individual pages for the image calibration process, gallery, a section detailing how to complete the calibration process and a section explaining our motivation behind this project. 
+*Frontend*
+We used the Next.js React framework to develop the our web application, utilizing Tailwind CSS for styling. We created individual pages for the image calibration process, gallery, a section detailing how to complete the calibration process, and a section explaining our motivation behind this project. 
 
-Backend:
+*Backend*
 In the backend we created python scripts that utilize the AstroPy library. These scripts are integrated with our frontend using Flask. Additionally, we use Firebase to store the gallery images and the .fit files that are uploaded as a part of our calibration process. 
 
 *Telescope Image Calibration*
@@ -35,7 +33,7 @@ The script uses two directories, one for the raw science images and one for the 
 ![](images/img_rgb.png)
 
 ### Results and Future Work
-This fall we were able to successfully create our web application with a functioning pipeline to calibrate telescope images starting with the raw science images and five combined files. We also implemented a gallery for students to upload their own images and share with peers.
+This fall we were able to successfully create our web application with a functioning pipeline to calibrate telescope images starting with the raw science images and five combined files. It will ask the user to upload each file before displaying the RGB image on the webpage, allowing students to download it to their local device. We also implemented a gallery for students to upload their own images and share with peers.
 
 ![](images/img_frontend.png)
 
