@@ -6,6 +6,7 @@
     padding: 3px 6px;
     border-style: double;
     border-width: 4px; 
+
     border-color: gainsboro;
     border-radius: 8px;
     display: inline-block; /*has link behave like a block object*/
@@ -25,8 +26,6 @@
     padding: 4px;
     color: gainsboro;
 }
-
-
 
 
 
